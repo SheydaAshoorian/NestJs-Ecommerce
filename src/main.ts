@@ -10,9 +10,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
   whitelist: true, // فیلدهای اضافه را حذف می‌کند
   transform: true, // جادوی تبدیل نوع را فعال می‌کند
-  transformOptions: {
-    enableImplicitConversion: true, // تبدیل هوشمند انواع ساده
-  },
+  transformOptions: {enableImplicitConversion: true}, // تبدیل هوشمند انواع ساده,
 }));
 
 
