@@ -1,15 +1,21 @@
 import { Injectable, NotFoundException, BadRequestException,InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from "@prisma/prisma.service";
 import { PaginationDto } from '@common/dtos/pagination.dto';
-
+import { Redis } from 'ioredis';
+import { RedisService } from '@songkeys/nestjs-redis';
 
 @Injectable()
 export abstract class BaseService<T , CreateDto, UpdateDto>{
-
+    
+    protected readonly redis: Redis;
     constructor(
         protected readonly prisma: PrismaService,
         protected readonly modelName: string,
-    ) {}
+        protected readonly redisService: RedisService,
+
+    ) {
+        this.redis = this.redisService.getClient();
+    }
 
 
 
@@ -46,19 +52,12 @@ export abstract class BaseService<T , CreateDto, UpdateDto>{
     }
 
 
-    async findOne(id:Number): Promise<any>{
-
-        try {
-            return await this.prisma[this.modelName].findFirst({
-                where : {id : Number(id), deletedAt : null}
-            })  
-        } catch (error) {
-
-            throw new BadRequestException(`رکورد با شناسه ${id} یافت نشد.`)
-            
-        }
-    
-    }
+    async findOne(id: number, options?: { include?: any }) {
+    return await this.prisma[this.modelName].findUnique({
+      where: { id, deletedAt: null } as any,
+      include: options?.include,
+    });
+  }
 
     async create( dto:CreateDto): Promise<T> {
 
@@ -74,8 +73,11 @@ export abstract class BaseService<T , CreateDto, UpdateDto>{
         }
     }
 
-    async update(): Promise<string>{
-        return 'hi';
+    async update(id: number, dto: UpdateDto) {
+        return await this.prisma[this.modelName].update({
+        where: { id },
+        data: dto as any,
+        });
     }
 
     async remove(id: number): Promise <T> {

@@ -14,8 +14,8 @@ export class ProductEntity implements Product{
     shop_id: number;
     category_id: number;
     seller_id: number;
-    createdAt: Date;
-    updatedAt: Date;
-    deletedAt: Date | null; // دقت کنید که در پریزما معمولاً فیلدهای ح
+    createdAt: Date ;
+    updatedAt: Date ;
+    deletedAt: Date ; // دقت کنید که در پریزما معمولاً فیلدهای ح
 
 }

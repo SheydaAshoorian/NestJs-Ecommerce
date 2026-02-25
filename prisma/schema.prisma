@@ -11,7 +11,6 @@ generator client {
 model Category {
   id        Int       @id @default(autoincrement())
   name      String
-  email     String    @unique
   products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

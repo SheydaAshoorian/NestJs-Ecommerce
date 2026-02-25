@@ -1,30 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { BaseService } from '@common/base/base.servise'; // دقت کن اسم فایل سِرویس رو چطوری ذخیره کردی
+import { PrismaService } from '@prisma/prisma.service';
+import { RedisService } from '@songkeys/nestjs-redis';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
-export class ProductsService {
-  
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
-  }
-
-
-
-  @Get()
-  findAll(@Query query: PaginationDto ) {
-    return this.productsService.findAll(query, { category: true })
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
-  }
-
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+export class ProductsService extends BaseService<any, CreateProductDto, UpdateProductDto> {
+  constructor(
+    protected readonly prisma: PrismaService,
+    protected readonly redisService: RedisService,
+  ) {
+    // مدل رو دقیقا همون اسمی بذار که در schema.prisma نوشتی (احتمالا product)
+    super(prisma, 'product', redisService);
   }
 }
