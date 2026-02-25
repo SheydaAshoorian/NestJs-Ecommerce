@@ -23,9 +23,9 @@
     "baseUrl": "./",
     "paths": {
       "@prisma/*": ["prisma/*"],
-      "@product/*": ["src/product/*"],
-      "@common/*": ["src/common/*"]
-
+      "@products/*": ["src/products/*"],
+      "@common/*": ["src/common/*"],
+      "@shop/*": ["src/shop/*"]
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Shop } from '@prisma/client';
+import { ProductEntity } from '@products/entities/product.entity';
 
 export class ShopEntity implements Shop {
   id: number;

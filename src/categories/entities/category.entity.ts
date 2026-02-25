@@ -1,4 +1,5 @@
 import { Category } from '@prisma/client';
+import { ProductEntity } from '@products/entities/product.entity';
 
 export class CategoryEntity implements Category {
   id: number;
