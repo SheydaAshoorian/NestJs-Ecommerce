@@ -1,10 +1,6 @@
-import { Product } from '@prisma/client'; // استفاده از تایپ خودکار پریزما برای امنیت کُد
+import { Product } from '@prisma/client'; 
 
 export class ProductEntity implements Product {
-  constructor(partial: Partial<ProductEntity>) {
-    Object.assign(this, partial);
-  }
-
   id: number;
   name: string;
   description: string;
@@ -14,5 +10,9 @@ export class ProductEntity implements Product {
   seller_id: number;
   createdAt: Date;
   updatedAt: Date;
-  deletedAt: Date; // دقت کنید که در پریزما معمولاً فیلدهای ح
+  deletedAt: Date | null;
+
+  constructor(partial: Partial<ProductEntity>) {
+    Object.assign(this, partial);
+  }
 }

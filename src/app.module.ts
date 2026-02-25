@@ -5,6 +5,8 @@ import { ProductsModule } from './products/products.module';
 import { PrismaModule } from '@prisma/prisma.module';
 import { CategoriesModule } from './categories/categories.module';
 import { RedisModule } from '@songkeys/nestjs-redis';
+import { SellerModule } from './seller/seller.module';
+import { ShopModule } from './shop/shop.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { RedisModule } from '@songkeys/nestjs-redis';
         port: 6379,
       },
     }),
+    SellerModule,
+    ShopModule,
   ],
 
   controllers: [AppController],
