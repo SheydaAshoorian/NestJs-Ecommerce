@@ -5,9 +5,10 @@ import { Redis } from 'ioredis';
 import { RedisService } from '@songkeys/nestjs-redis';
 
 @Injectable()
-export abstract class BaseService<T , CreateDto, UpdateDto>{
+export abstract class BaseService< T , CreateDto, UpdateDto>{
     
     protected readonly redis: Redis;
+    
     constructor(
         protected readonly prisma: PrismaService,
         protected readonly modelName: string,

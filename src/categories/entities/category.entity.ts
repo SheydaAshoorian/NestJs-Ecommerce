@@ -1,17 +1,16 @@
 import { Category } from '@prisma/client';
 
 
-export class CategoryEntity implement Category {
+export class CategoryEntity implements Category {
 
-    constructor(partial:Partial<CategoryEntity>){
-        
-        Object.assign(this.partial);
+    constructor(partial: Partial<CategoryEntity>){
+
+        Object.assign(this,partial);
     }
 
-    id : number ,     
-    name:      string,
-    products  Product[],
-    createdAt?: DateTime,
-    updatedAt?: Date,
-    deletedAt?: Date,
+    id : number ;    
+    name:      string;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
 }
