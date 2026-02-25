@@ -13,7 +13,7 @@ export abstract class BaseService<T , CreateDto, UpdateDto>{
 
 
 
-    async findAll(pagination: PaginationDto){
+    async findAll(pagination: PaginationDto ,includ?: any ){
 
         const { page, limit } = pagination;
         const skip = (page - 1) * +limit;
@@ -23,6 +23,7 @@ export abstract class BaseService<T , CreateDto, UpdateDto>{
             await this.prisma[this.modelName].findMany({
                 skip,
                 take: limit,
+                includ: includ,
                 where : { deletedAt : null},
                 orderBy: { createdAt: 'desc' },
 

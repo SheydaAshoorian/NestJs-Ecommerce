@@ -9,8 +9,11 @@ export class ProductsService {
     return 'This action adds a new product';
   }
 
-  findAll() {
-    return `This action returns all products`;
+
+
+  @Get()
+  findAll(@Query query: PaginationDto ) {
+    return this.productsService.findAll(query, { category: true })
   }
 
   findOne(id: number) {
