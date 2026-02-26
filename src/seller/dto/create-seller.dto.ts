@@ -1,7 +1,6 @@
-import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
+import { IsString, IsEmail, IsNotEmpty, Matches } from 'class-validator';
 
 export class CreateSellerDto {
-
   @IsString()
   @IsNotEmpty()
   first_name: string;
@@ -14,7 +13,10 @@ export class CreateSellerDto {
   email: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'شماره موبایل اجباری است' })
+  @Matches(/^09\d{9}$/, {
+    message:
+      'شماره موبایل باید با 09 شروع شده و ۱۱ رقم باشد (مثال: 09123456789)',
+  })
   phone: string;
-  
 }

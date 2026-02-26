@@ -7,7 +7,7 @@ export class CategoryEntity implements Category {
   products?: ProductEntity[];
   createdAt: Date;
   updatedAt: Date;
-  deletedAt: Date;
+  deletedAt: Date | null;
   constructor(partial: Partial<CategoryEntity>) {
     Object.assign(this, partial);
   }
