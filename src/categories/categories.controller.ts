@@ -2,15 +2,19 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CategoryEntity } from '@category/entities/category.entity';
+import { ApiTags, ApiOperation,ApiResponse } from '@nestjs/swagger';
 
-@Controller('categories')
+@Controller('category')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  // @Post()
-  // create(@Body() createCategoryDto: CreateCategoryDto) {
-  //   return this.categoriesService.create(createCategoryDto);
-  // }
+  @ApiResponse({status:201, type: CategoryEntity})
+  @ApiOperation({summary:'اضافه کردن دسته بندی جدید'})
+  @Post()
+  create(@Body() createCategoryDto: CreateCategoryDto) {
+    return this.categoriesService.create(createCategoryDto);
+  }
 
 //   @Get()
 //   findAll() {
