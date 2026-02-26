@@ -16,4 +16,5 @@ export class CreateSellerDto {
   @IsString()
   @IsNotEmpty()
   phone: string;
+  
 }
