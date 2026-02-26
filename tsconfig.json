@@ -25,7 +25,8 @@
       "@prisma/*": ["prisma/*"],
       "@products/*": ["src/products/*"],
       "@common/*": ["src/common/*"],
-      "@shop/*": ["src/shop/*"]
+      "@shops/*": ["src/shop/*"],
+      "@category/*": ["src/categories/*"]
     }
   }
 }
