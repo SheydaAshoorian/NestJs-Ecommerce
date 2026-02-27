@@ -4,12 +4,13 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CategoryEntity } from '@category/entities/category.entity';
 import { ApiTags, ApiOperation,ApiResponse } from '@nestjs/swagger';
+import { ApiStandardResponse } from '@common/decorators/swagger-res.decorator';
 
 @Controller('category')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @ApiResponse({status:201, type: CategoryEntity})
+  @ApiStandardResponse(CategoryEntity) 
   @ApiOperation({summary:'اضافه کردن دسته بندی جدید'})
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {

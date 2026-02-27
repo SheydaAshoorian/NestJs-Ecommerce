@@ -14,7 +14,6 @@ export class SellerService extends BaseService < Seller, CreateSellerDto, Update
     protected readonly prisma: PrismaService,
     protected readonly redisService: RedisService
   ){
-
     super(prisma,'Seller', redisService, SellerEntity)
   }
 

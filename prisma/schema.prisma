@@ -1,11 +1,11 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["prismaSchemaFolder"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Category {
@@ -18,36 +18,31 @@ model Category {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String
   price       Float
-
   shop_id     Int
-  shop        Shop     @relation(fields: [shop_id], references: [id])
-
+  shop        Shop      @relation(fields: [shop_id], references: [id])
   category_id Int
-  category    Category @relation(fields: [category_id], references: [id])
-
-  seller_id   Int
-  seller      Seller   @relation(fields: [seller_id], references: [id])
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  category    Category  @relation(fields: [category_id], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
 }
 
 model Seller {
-  id         Int       @id @default(autoincrement())
-  first_name String
-  last_name  String
-  email      String    @unique
-  phone      String    @unique
-  shops      Shop[]
-  products   Product[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  deletedAt  DateTime?
+  id           Int       @id @default(autoincrement())
+  user_id      Int       @unique
+  user         User      @relation(fields: [user_id], references: [id])
+  shops        Shop[]
+  address      String?
+  nationalCode String?   @unique
+  instagram    String?
+  bankAccount  String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
 }
 
 model Shop {
@@ -55,9 +50,29 @@ model Shop {
   name      String
   address   String?
   seller_id Int
-  seller    Seller    @relation(fields: [seller_id], references: [id])
   products  Product[]
+  seller    Seller    @relation(fields: [seller_id], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+}
+
+enum Role {
+  ADMIN
+  SELLER
+  CUSTOMER
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  first_name String
+  last_name  String
+  email      String    @unique
+  phone      String    @unique
+  password   String
+  role       Role[]    @default([CUSTOMER])
+  seller     Seller?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 }
