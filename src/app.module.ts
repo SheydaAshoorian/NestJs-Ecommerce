@@ -8,6 +8,8 @@ import { RedisModule } from '@songkeys/nestjs-redis';
 import { SellerModule } from './seller/seller.module';
 import { ShopModule } from './shop/shop.module';
 import { UserModule } from './user/user.module';
+import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/auth.controller';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { UserModule } from './user/user.module';
     UserModule,
   ],
 
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, AuthController],
+  providers: [AppService, AuthService],
 })
 export class AppModule {}

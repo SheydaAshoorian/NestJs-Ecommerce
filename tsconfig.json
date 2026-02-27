@@ -26,6 +26,7 @@
       "@products/*": ["src/products/*"],
       "@common/*": ["src/common/*"],
       "@shops/*": ["src/shop/*"],
+      "@users/*": ["src/user/*"],
       "@sellers/*": ["src/seller/*"],
       "@category/*": ["src/categories/*"]
     }
