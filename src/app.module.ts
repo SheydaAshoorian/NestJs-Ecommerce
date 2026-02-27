@@ -7,6 +7,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { RedisModule } from '@songkeys/nestjs-redis';
 import { SellerModule } from './seller/seller.module';
 import { ShopModule } from './shop/shop.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ShopModule } from './shop/shop.module';
     }),
     SellerModule,
     ShopModule,
+    UserModule,
   ],
 
   controllers: [AppController],

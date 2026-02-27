@@ -1,14 +1,14 @@
-import { Seller } from '@prisma/client';
 import { ShopEntity } from '@shops/entities/shop.entity';
-import { ProductEntity } from '@products/entities/product.entity';
 
-export class SellerEntity implements Seller {
+export class SellerEntity {
 
-  id : number;        
-  first_name: string;
-  last_name:  string;
-  email:      string;  
-  phone:      string;  
+  id :          number;        
+  user_id:      number;
+  email:        string;  
+  nationalCode: string | null; 
+  instagram: string | null;
+  bankAccount: string | null;
+  address: string | null;
   shops:      ShopEntity[];
   createdAt:  Date;
   updatedAt:  Date;
